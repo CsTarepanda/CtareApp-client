@@ -17,17 +17,18 @@ def connect(name):
 
 if __name__ == "__main__":
     import settings
+    from importlib import import_module
 
     THREADS = []
     for appname in settings.APPLICATIONS:
-        mod = __import__(appname +".ws")
+        mod = import_module(appname +".ws")
         header = {"Type" : "receiver"}
-        header.update(mod.ws.WSThread.ACCOUNT)
+        header.update(mod.WSThread.ACCOUNT)
         client = websocket.create_connection("{0}{1}".format(
             settings.URL,
-            mod.ws.WSThread.URL
+            mod.WSThread.URL
             ), header=header)
-        thread = mod.ws.WSThread(client)
+        thread = mod.WSThread(client)
         thread.start()
     #     print(" === connect {} === ".format(i))
 
