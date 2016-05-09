@@ -21,7 +21,7 @@ if __name__ == "__main__":
 
     THREADS = []
     for appname in settings.APPLICATIONS:
-        mod = import_module(appname +".ws")
+        mod = import_module(appname +".app")
         header = {"Type" : "receiver"}
         header.update(mod.WSThread.ACCOUNT)
         client = websocket.create_connection("{0}{1}".format(
@@ -32,19 +32,3 @@ if __name__ == "__main__":
         thread.start()
     #     print(" === connect {} === ".format(i))
 
-    # import sys
-    # if len(sys.argv) > 1:
-    #     connect(sys.argv[1]).start()
-    # else:
-    #     ws1 = websocket.create_connection("ws://localhost:8080/test/", header={"User":"ctare", "Type":"sender"})
-    #     ws1.send("YO")
-
-    # ws2 = websocket.create_connection("ws://localhost:8080/test/", header={"User":"ctare", "Type":"receiver"})
-    # ws3 = websocket.create_connection("ws://localhost:8080/test/", header={"User":"ctare", "Type":"receiver"})
-    # print("ws1: " + ws2.recv())
-    # print("ws1: " + ws2.recv())
-    # print("ws1: " + ws2.recv())
-    # # print("ws2: " + ws2.recv())
-    # print("ws3: " + ws3.recv())
-    # thread = WSThread(ws)
-    # thread.start()
